@@ -9,16 +9,16 @@ import java.util.Properties;
 
 /*
  * La Classe ConnectionSingleton implementa il pattern di progettazione Singleton, PER DETTAGLI VEDI GUIDA SEZIONE n. 10
- * Nello specifico implementa è fornisce un metodo sicuro ed efficace per la connessione con il nostro database
+ * Nello specifico implementa ï¿½ fornisce un metodo sicuro ed efficace per la connessione con il nostro database
  */
 
 public class ConnectionSingleton {
 
 	/*
-	 * private : indica una funzione/variabile il cui scope ( ovvero visibilità ) è delineato all'interno della classe in cui
+	 * private : indica una funzione/variabile il cui scope ( ovvero visibilitï¿½ ) ï¿½ delineato all'interno della classe in cui
 	 * viene creato.
-	 * static : indica che il valore della variabile in questione è unico per tutte le instanze della classe
-	 * Connection : è un tipo di oggetto
+	 * static : indica che il valore della variabile in questione ï¿½ unico per tutte le instanze della classe
+	 * Connection : ï¿½ un tipo di oggetto
 	 */
     private static Connection connection = null;
 
@@ -29,24 +29,24 @@ public class ConnectionSingleton {
     }
 
     /*
-     * La funzione getInstance() è il cuore del pattern Singleton , essa infatti restituisce in output sempre la stesso dato
-     * che quindi se modificato verrà modificato la modifica avverrà a tutte le chiamate.
+     * La funzione getInstance() ï¿½ il cuore del pattern Singleton , essa infatti restituisce in output sempre la stesso dato
+     * che quindi se modificato verrï¿½ modificato la modifica avverrï¿½ a tutte le chiamate.
      * All'interno della funzione si spiega passo per passo l'implementazione attuale
      */
     public static Connection getInstance() {
     	// eseguo un controllo per assicurarmi che non sia la prima instanza del dato
         if (connection == null) {
-        	// nel caso sia la prima volta procedo con l'eseguire la connessione al database che rimarrà quindi la stessa
+        	// nel caso sia la prima volta procedo con l'eseguire la connessione al database che rimarrï¿½ quindi la stessa
         	// per tutto il corso del programma.
-        	// & il costrutto try/catch è utilizzato principalmente per la gestione degli errori, maggiori info SEZIONE 1.
+        	// & il costrutto try/catch ï¿½ utilizzato principalmente per la gestione degli errori, maggiori info SEZIONE 1.
             try {
             	// creo un nuovo oggetto properties
                 Properties properties = new Properties();
-                // tramite un inputStream, nello specifico un FileInputStream, carico le proprietà presenti nel file specificato
+                // tramite un inputStream, nello specifico un FileInputStream, carico le proprietï¿½ presenti nel file specificato
                 InputStream inputStream = new FileInputStream("config.properties");
                 properties.load(inputStream);
                 /*
-                *a questo punto recupero dalle proprietà le varie specifiche di cui necessitiamo
+                *a questo punto recupero dalle proprietï¿½ le varie specifiche di cui necessitiamo
                 * a seconda del database utilizzato esse saranno diverse di volta in volta
                 * le varie specifiche sono facilmente recuperabili sulla rete, modificare di conseguenza il file config.properties
                 * PS: quelle di base necessitano solo la modifica del nome del database 
@@ -69,7 +69,7 @@ public class ConnectionSingleton {
 
             
             } catch (Exception e) {
-        
+                e.printStackTrace();
             }
         }
         // restituisco in output la connessione al database

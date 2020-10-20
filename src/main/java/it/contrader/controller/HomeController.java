@@ -14,7 +14,7 @@ public class HomeController implements Controller {
 	}
 
 	/**
-	 * Se la request non � nulla la spacchetta estraendo i valori relativi alle chiavi "usename" e "password". Quindi chiama il Login Service 
+	 * Se la request non � nulla la spacchetta estraendo i valori relativi alle chiavi "usename" e "password". Quindi chiama il Login Service 
 	 * e ottiene uno usertype dal database. Se non trova le credenziali rimanda alla Login View-
 	 */
 	public void doControl(Request request) {
@@ -25,6 +25,12 @@ public class HomeController implements Controller {
 
 			// Qui invoca il Login Service
 			String usertype= loginService.login(username, password);
+
+			// Se usertype è null allora il login non è andato a buon fine
+			if (usertype == null){
+				System.out.println("Wrong username and/or password");
+				MainDispatcher.getInstance().callView("Login", null);
+			}
 
 			// Reindirizza alla giusta view in base allo usertype
 			switch(usertype) {

@@ -56,6 +56,7 @@ public class UserDAO {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 
@@ -80,6 +81,7 @@ public class UserDAO {
 
 			return user;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -121,6 +123,7 @@ public class UserDAO {
 					return false;
 
 			} catch (SQLException e) {
+				e.printStackTrace();
 				return false;
 			}
 		}
@@ -139,6 +142,7 @@ public class UserDAO {
 				return true;
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
