@@ -1,5 +1,10 @@
 package it.contrader.controller;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.LoginService;
 
@@ -21,7 +26,7 @@ public class HomeController implements Controller {
 		if (request != null) {
 			
 			String username = request.get("username").toString();
-			String password = request.get("password").toString();
+			String password = SecurityController.hashPassword(request.get("password").toString());
 
 			// Qui invoca il Login Service
 			String usertype= loginService.login(username, password);
