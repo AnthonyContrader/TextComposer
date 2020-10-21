@@ -60,6 +60,14 @@ public class UserController implements Controller {
 			request.put("user", userDTO);
 			MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
 			break;
+		// Arriva qui dalla UserInsertView. Invoca il Service con il parametro username e invia alla UserInsertView un booleano per vedere se lo user esiste gia
+		case "READUSER":
+		
+			username = request.get("username").toString();
+			boolean readUserDTO = userService.readUser(username);
+			request.put("readUser", readUserDTO);
+			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			break;
 		
 		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
