@@ -37,6 +37,11 @@ public class UserService {
 		// Ottiene un'entità e la restituisce convertendola in DTO
 		return userConverter.toDTO(userDAO.read(id));
 	}
+	
+	public boolean readUser(String username) {
+		// Ottiene un'entità e la restituisce convertendola in DTO
+		return userDAO.readUser(username);
+	}
 
 
 	public boolean insert(UserDTO dto) {

@@ -21,9 +21,12 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void showResults(Request request) {
+		
 		if (request!=null) {
+			
 			System.out.println("Inserimento andato a buon fine.\n");
 			MainDispatcher.getInstance().callView("User", null);
+			
 		}
 	}
 
@@ -32,12 +35,18 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void showOptions() {
+		
 			System.out.println("Inserisci username dell'utente:");
 			username = getInput();
 			System.out.println("Inserisci password dell'utente:");
 			password = getInput();
-			System.out.println("Inserisci tipo dell'utente:");
-			usertype = getInput();
+			//System.out.println("Inserisci tipo dell'utente:(ADMIN o USER)");
+			usertype = "USER";
+			
+			if(username.isEmpty() || password.isEmpty()) {
+				System.out.println("Dati inseriti non validi\n");
+				MainDispatcher.getInstance().callView("user.UserInsert", null);
+			}
 	}
 
 	/**
@@ -45,12 +54,15 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void submit() {
-		request = new Request();
-		request.put("username", username);
-		request.put("password", password);
-		request.put("usertype", usertype);
-		request.put("mode", mode);
-		MainDispatcher.getInstance().callAction("User", "doControl", request);
+		
+			request = new Request();
+			request.put("username", username);
+			request.put("password", password);
+			request.put("usertype", usertype);
+			request.put("mode", mode);
+			MainDispatcher.getInstance().callAction("User", "doControl", request);
+	
+		
 	}
 
 

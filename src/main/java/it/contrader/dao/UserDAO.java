@@ -19,6 +19,8 @@ public class UserDAO {
 	private final String QUERY_READ = "SELECT * FROM user WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE user SET username=?, password=?, usertype=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM user WHERE id=?";
+	private final String QUERY_USER = "SELECT * FROM user WHERE username=?";;
+
 
 	public UserDAO() {
 
@@ -83,6 +85,39 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+
+	}
+	
+	public boolean readUser(String readUser) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+
+
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_USER);
+			preparedStatement.setString(1, readUser);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			
+			if(!resultSet.next()) {
+				
+						return true;
+			}else {
+				
+				return false;
+			}
+/*String username, password, usertype;
+System.out.println("esiste");
+username = resultSet.getString("username");
+password = resultSet.getString("password");
+usertype = resultSet.getString("usertype");
+user = new User(username, password, usertype);
+user.setUsername(resultSet.getString("username"));*/
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return false;
 		}
 
 	}
