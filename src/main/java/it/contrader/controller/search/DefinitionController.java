@@ -17,7 +17,8 @@ import org.jsoup.select.Elements;
  * - "pipeline" : cosa ricercare
  * "pipeline" è una lista che può contenere
  * "lemma"
- * "part
+ * "definizione" Al momento, torna solo la definizione
+ * ecc.
  */
 
 public class DefinitionController implements Controller {
@@ -28,9 +29,9 @@ public class DefinitionController implements Controller {
 			try {
 				String word = request.get("word").toString();
 				Document doc = Jsoup.connect("https://www.dizionario-italiano.it/dizionario-italiano.php?parola="+word).get();
-				Elements lemmas = doc.getElementsByClass("lemma");
-				for (Element lemma:lemmas) {
-					System.out.println(lemma.text());
+				Elements definitions = doc.getElementsByClass("italiano");
+				for (Element def:definitions) {
+					System.out.println(def.text());
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -38,6 +39,6 @@ public class DefinitionController implements Controller {
 			}
 			
 		}
-		else MainDispatcher.getInstance().callView("search.Definition", request);
+		MainDispatcher.getInstance().callView("search.Definition", request);
 	}
 }
