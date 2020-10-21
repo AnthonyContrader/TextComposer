@@ -16,7 +16,7 @@ public interface View {
 	 */
 	public void showResults (Request request);
 	/*
-	 * funzionamento : il metodo showOption mostrerà su schermo di volta in volta le varie opzione ( una sorta di menu )
+	 * funzionamento : il metodo showOption mostrerà su schermo di volta in volta le varie opzioni ( una sorta di menu )
 	 * 				a disposizione dell'utente e recuperera da tastiera i vari input per il menu
 	 */
 	public void showOptions ();
