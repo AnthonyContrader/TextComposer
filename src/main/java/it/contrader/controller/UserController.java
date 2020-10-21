@@ -18,7 +18,8 @@ public class UserController implements Controller {
 	 * definisce il pacchetto di vista user.
 	 */
 	private static String sub_package = "user.";
-	
+
+	private final String readUser = "READUSER";
 	private UserService userService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
@@ -66,6 +67,7 @@ public class UserController implements Controller {
 			username = request.get("username").toString();
 			boolean readUserDTO = userService.readUser(username);
 			request.put("readUser", readUserDTO);
+			
 			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
 			break;
 		
@@ -75,14 +77,21 @@ public class UserController implements Controller {
 			password = request.get("password").toString();
 			usertype = request.get("usertype").toString();
 			
-			//costruisce l'oggetto user da inserire
-			UserDTO usertoinsert = new UserDTO(username, password, usertype);
-			//invoca il service
-			userService.insert(usertoinsert);
-			request = new Request();
-			request.put("mode", "mode");
-			//Rimanda alla view con la risposta
-			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			boolean readUserDTO2 = userService.readUser(username);
+			
+			if(readUserDTO2) {
+				//costruisce l'oggetto user da inserire
+				UserDTO usertoinsert = new UserDTO(username, password, usertype);
+				//invoca il service
+				userService.insert(usertoinsert);
+				request = new Request();
+				request.put("mode", "mode");
+				//Rimanda alla view con la risposta
+				MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			}else {
+				System.out.println("Username gia esistente. Cambia username e riprova.\n");
+				MainDispatcher.getInstance().callView(sub_package + "UserInsert", null);
+			}
 			break;
 		
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service

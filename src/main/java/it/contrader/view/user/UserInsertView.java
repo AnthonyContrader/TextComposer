@@ -11,7 +11,6 @@ public class UserInsertView extends AbstractView{
 	private String password;
 	private String usertype;
 	private final String mode = "INSERT";
-	private final String readUser = "READUSER";
 
 	public UserInsertView() {
 	}
@@ -24,14 +23,10 @@ public class UserInsertView extends AbstractView{
 	public void showResults(Request request) {
 		
 		if (request!=null) {
-			boolean user = (boolean) request.get("readUser");
-			if(user) {
+			
 			System.out.println("Inserimento andato a buon fine.\n");
 			MainDispatcher.getInstance().callView("User", null);
-		}else{
-			System.out.println("Username gia esistente. Cambia username e riprova.\n");
-			MainDispatcher.getInstance().callView("user.UserInsert", null);
-		}
+			
 		}
 	}
 
@@ -40,6 +35,7 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void showOptions() {
+		
 			System.out.println("Inserisci username dell'utente:");
 			username = getInput();
 			System.out.println("Inserisci password dell'utente:");
@@ -48,7 +44,7 @@ public class UserInsertView extends AbstractView{
 			usertype = "USER";
 			
 			if(username.isEmpty() || password.isEmpty()) {
-				System.out.println("Dati inseriti non validi");
+				System.out.println("Dati inseriti non validi\n");
 				MainDispatcher.getInstance().callView("user.UserInsert", null);
 			}
 	}
@@ -58,21 +54,14 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void submit() {
-		request = new Request();
-		request.put("username", username);
-		request.put("mode", readUser);
-		MainDispatcher.getInstance().callAction("User", "doControl", request);
 		
-		
-			boolean user = (boolean) request.get("readUser");
-			if(user) {
-				request = new Request();
-				request.put("username", username);
-				request.put("password", password);
-				request.put("usertype", usertype);
-				request.put("mode", mode);
-				MainDispatcher.getInstance().callAction("User", "doControl", request);
-		}
+			request = new Request();
+			request.put("username", username);
+			request.put("password", password);
+			request.put("usertype", usertype);
+			request.put("mode", mode);
+			MainDispatcher.getInstance().callAction("User", "doControl", request);
+	
 		
 	}
 
