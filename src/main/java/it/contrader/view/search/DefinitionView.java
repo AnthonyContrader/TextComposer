@@ -33,6 +33,10 @@ public class DefinitionView extends AbstractView {
 			Request request = new Request();
 			request.put("word", word);
 			MainDispatcher.getInstance().callAction("search.Definition", "doControl", request);
+			break;
+		case "e":
+		case "E":
+			MainDispatcher.getInstance().callView("HomeUser", null);
 		}
 	}
 
