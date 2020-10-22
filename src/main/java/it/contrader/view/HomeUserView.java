@@ -18,8 +18,7 @@ public class HomeUserView extends AbstractView{
 	@Override
 	public void showOptions() {
 		
-		System.out.println("Vocabolo da ricercare:");
-		word=this.getInput();
+		
 		System.out.println("\n-------------MENU------------\n");
 		System.out.println("Inserisci:");
 		System.out.println("[1] Definizione");
@@ -34,6 +33,8 @@ public class HomeUserView extends AbstractView{
 		switch (choice) {
 		
 		case "1":
+			System.out.println("Vocabolo da ricercare:");
+			word=this.getInput();
 			request = new Request();
 			request.put("word", word);
 			MainDispatcher.getInstance().callAction("search.Definition", "doControl", request);
