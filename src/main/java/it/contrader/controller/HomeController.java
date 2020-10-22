@@ -1,10 +1,5 @@
 package it.contrader.controller;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.LoginService;
 
